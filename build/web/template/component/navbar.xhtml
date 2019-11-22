@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<section xmlns="http://www.w3.org/1999/xhtml"
+         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+         xmlns:h="http://xmlns.jcp.org/jsf/html"
+         xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <nav class="navbar navbar-expand-lg navbar-light bg-withe shadow py-0">
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler" 
+                type="button" 
+                data-toggle="collapse" 
+                data-target="#navbarNav" 
+                aria-controls="navbarNav" 
+                aria-expanded="false" 
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon">
+            </span>
+        </button>
+        <div class="collapse navbar-collapse" 
+             id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item ">
+                    <a class="nav-link   #{(routeManagedBean.getUrlRoute('inicio'))?'active':''}" 
+                       href="/FinalProjectJava/">
+                        Inicio
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link   #{(routeManagedBean.getUrlRoute('productos'))?'active':''}"
+                       href="/FinalProjectJava/faces/view/ecommerce/productos.xhtml">
+                        Productos
+                    </a>
+                </li>
+            </ul>
+            <ul class="ml-auto navbar-nav ml-3" >
+                <li class="nav-item">
+                    <h:link  
+                        rendered="#{sessionManagedBean1.getUsuarioLogin()==null}"
+                        outcome="login" 
+                        class="nav-link">
+                        Iniciar sesión
+                    </h:link>
+                </li>
+
+
+                <li class="nav-item">
+                    <h:form>
+
+                        <h:link  
+                            rendered="#{sessionManagedBean1.getUsuarioLogin()==null}"
+                            outcome="register" 
+                            class="nav-link">
+                            Registrarte
+                        </h:link>
+                    </h:form>
+                </li>
+                <li class="nav-item" >
+
+                    <h:link  
+                        rendered="#{sessionManagedBean1.isAdmin()}"
+                        outcome="login" 
+                        class="nav-link">
+                        Administrador:#{sessionManagedBean1.getUsuarioLogin().nombre}
+                    </h:link>
+                </li>
+                <li class="nav-item" >
+                    <h:link  
+                        rendered="#{sessionManagedBean1.getUsuarioLogin()!=null}"
+                        outcome="profile" 
+                        class="nav-link">
+                        Hola, #{sessionManagedBean1.getUsuarioLogin().nombre}
+                    </h:link>
+                </li>
+                <li class="nav-item">
+                    <h:link  
+                        outcome="car" 
+                        class="nav-link">
+                        <i class="fas fa-shopping-cart">
+                        </i>
+                    </h:link>
+                </li>
+                <li class="nav-item">
+                    <h:form>
+                        <h:commandLink 
+                            rendered="#{sessionManagedBean1.getUsuarioLogin()!=null}"
+                            action="#{sessionManagedBean1.logout}" 
+                            class="nav-link">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </h:commandLink>
+                    </h:form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</section>
+

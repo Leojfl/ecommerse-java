@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+  
+    <application>
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+    </application>
+   
+    <managed-bean>
+        <managed-bean-name>sessionManagedBean</managed-bean-name>
+        <managed-bean-class>beanManager.SessionManagedBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+  
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-action>#{routeManagedBean.goProductIndex}</from-action>
+            <from-outcome>page</from-outcome>
+            <to-view-id>view/admin/producto/List.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>indexCategory</from-outcome>
+            <to-view-id>view/admin/categoria/List.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>indexProduct</from-outcome>
+            <to-view-id>view/admin/producto/List.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>indexUser</from-outcome>
+            <to-view-id>view/admin/usuario/List.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>newxhtml.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>true</from-outcome>
+            <to-view-id>view/admin/producto/List.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>false</from-outcome>
+            <to-view-id>view/newxhtml.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>login</from-outcome>
+            <to-view-id>view/login/login.xhtml</to-view-id>
+        </navigation-case>
+         <navigation-case>
+            <from-outcome>logout</from-outcome>
+            <to-view-id>view/login/login.xhtml</to-view-id>
+        </navigation-case>
+         <navigation-case>
+            <from-outcome>car</from-outcome>
+            <to-view-id>view/ecommerce/carrito.xhtml</to-view-id>
+        </navigation-case>
+         <navigation-case>
+            <from-outcome>register</from-outcome>
+            <to-view-id>view/ecommerce/registrar.xhtml</to-view-id>
+        </navigation-case>
+        
+         <navigation-case>
+            <from-outcome>profile</from-outcome>
+            <to-view-id>view/ecommerce/informacion.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>view/login/login.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>admin</from-outcome>
+            <to-view-id>view/indexAdmin.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>user</from-outcome>
+            <to-view-id>view/login/login.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>false</from-outcome>
+            <to-view-id>view/login/login.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+</faces-config>

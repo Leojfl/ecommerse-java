@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewCategoriaProductoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewCategoriaProductoLabel_id}"/>
+                    <h:outputText value="#{categoriaProductoController.selected.id}" title="#{bundle.ViewCategoriaProductoTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewCategoriaProductoLabel_fkIdCategoria}"/>
+                    <h:outputText value="#{categoriaProductoController.selected.fkIdCategoria}" title="#{bundle.ViewCategoriaProductoTitle_fkIdCategoria}"/>
+                    <h:outputText value="#{bundle.ViewCategoriaProductoLabel_fkIdProducto}"/>
+                    <h:outputText value="#{categoriaProductoController.selected.fkIdProducto}" title="#{bundle.ViewCategoriaProductoTitle_fkIdProducto}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{categoriaProductoController.destroyAndView}" value="#{bundle.ViewCategoriaProductoDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewCategoriaProductoEditLink}"/>
+                <br />
+                <h:commandLink action="#{categoriaProductoController.prepareCreate}" value="#{bundle.ViewCategoriaProductoCreateLink}" />
+                <br />
+                <h:commandLink action="#{categoriaProductoController.prepareList}" value="#{bundle.ViewCategoriaProductoShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewCategoriaProductoIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

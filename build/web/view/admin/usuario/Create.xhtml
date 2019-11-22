@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:composition template="./../../../template/mainAdminTemplate.xhtml">
+        <ui:define name="content">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h3>Nuevo usuario</h3>
+                </div>
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                                </div>
+                                <div class="col-md-8 offset-md-2">
+                                    <h:form>
+                                        <div class="row">
+                                            <div class="form-group col-md-12">
+                                                <h:outputLabel value="#{bundle.CreateUsuarioLabel_nombre}" for="nombre" />
+                                                <h:inputText id="nombre" 
+                                                             value="#{usuarioController.selected.nombre}" 
+                                                             title="#{bundle.CreateUsuarioTitle_nombre}" 
+                                                             required="true" 
+                                                             class="form-control"
+                                                             requiredMessage="#{bundle.CreateUsuarioRequiredMessage_nombre}"/>
+                                            </div>
+                                            <div class="form-group col-md-12">
+
+                                                <h:outputLabel value="#{bundle.CreateUsuarioLabel_apellidos}" for="apellidos" />
+                                                <h:inputText id="apellidos"
+                                                             value="#{usuarioController.selected.apellidos}" 
+                                                             title="#{bundle.CreateUsuarioTitle_apellidos}" 
+                                                             required="true" 
+                                                             class="form-control"
+                                                             requiredMessage="#{bundle.CreateUsuarioRequiredMessage_apellidos}"/>
+                                            </div>
+                                            <div class="form-group col-md-12">
+
+
+                                                <h:outputLabel value="#{bundle.CreateUsuarioLabel_correo}" for="correo" />
+                                                <h:inputText id="correo"
+                                                             value="#{usuarioController.selected.correo}" 
+                                                             title="#{bundle.CreateUsuarioTitle_correo}" 
+                                                             required="true" 
+                                                             class="form-control"
+                                                             requiredMessage="#{bundle.CreateUsuarioRequiredMessage_correo}"/>
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <h:outputLabel value="#{bundle.CreateUsuarioLabel_alias}" for="alias" />
+                                                <h:inputText id="alias" 
+                                                             value="#{usuarioController.selected.alias}" 
+                                                             title="#{bundle.CreateUsuarioTitle_alias}" 
+                                                             required="true" 
+                                                             class="form-control"
+                                                             requiredMessage="#{bundle.CreateUsuarioRequiredMessage_alias}"/>
+                                            </div>
+                                             <div class="form-group col-md-12">
+                                                <h:outputLabel value="Username" for="username" />
+                                                <h:inputText id="username" 
+                                                             value="#{usuarioController.selected.username}" 
+                                                             title="username" 
+                                                             required="true" 
+                                                             class="form-control"
+                                                             requiredMessage="username requerido"/>
+                                            </div>
+                                             <div class="form-group col-md-12">
+                                                <h:outputLabel value="Contraseña" for="password" />
+                                                <h:inputText id="password" 
+                                                             value="#{usuarioController.selected.password}" 
+                                                             title="password" 
+                                                             required="true" 
+                                                             class="form-control"
+                                                             requiredMessage="Contraseña requerida"/>
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <h:outputLabel value="#{bundle.CreateUsuarioLabel_fkIdRol}" for="fkIdRol" />
+                                                <h:selectOneMenu id="fkIdRol"
+                                                                 value="#{usuarioController.selected.fkIdRol}" 
+                                                                 title="#{bundle.CreateUsuarioTitle_fkIdRol}" 
+                                                                 required="true" 
+                                                                 requiredMessage="#{bundle.CreateUsuarioRequiredMessage_fkIdRol}">
+                                                    <f:selectItems value="#{rolController.itemsAvailableSelectOne}"/>
+                                                </h:selectOneMenu>
+                                            </div>
+                                        </div>
+                                    </h:form>
+                                </div>
+                                <div class="col-md-12 text-center">
+                                    <h:commandLink 
+                                        class="btn btn-primary"
+                                        action="#{usuarioController.create}"
+                                        value="Guardar" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

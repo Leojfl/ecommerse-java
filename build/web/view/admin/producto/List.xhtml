@@ -1,0 +1,88 @@
+
+<section xmlns="http://www.w3.org/1999/xhtml"
+         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+         xmlns:h="http://xmlns.jcp.org/jsf/html"
+         xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="./../../../template/mainAdminTemplate.xhtml">
+
+        <ui:define name="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h:commandLink action="#{productoController.prepareCreate}" value="Agregar producto"/>
+                        <br />
+                        <br />
+                    </div>
+                    <div class="col-md-12">
+                        <h:panelGroup id="messagePanel" layout="block">
+                            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                        </h:panelGroup>
+                        <h:outputText escape="false" value="#{bundle.ListProductoEmpty}" rendered="#{productoController.items.rowCount == 0}"/>
+                        <h:panelGroup  rendered="#{productoController.items.rowCount > 0}"> 
+                            <h:outputText value="#{productoController.pagination.pageFirstItem + 1}..#{productoController.pagination.pageLastItem + 1}/#{productoController.pagination.itemsCount}"/>
+                            <h:commandLink action="#{productoController.previous}" value="#{bundle.Previous} #{productoController.pagination.pageSize}" rendered="#{productoController.pagination.hasPreviousPage}"/>
+                            <h:commandLink action="#{productoController.next}" value="#{bundle.Next} #{productoController.pagination.pageSize}" rendered="#{productoController.pagination.hasNextPage}"/>
+                            <h:dataTable class="table table-striped" value="#{productoController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListProductoTitle_id}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.id}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListProductoTitle_nombre}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.nombre}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListProductoTitle_precio}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.precio}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListProductoTitle_cantidad}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.cantidad}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Estatus"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.activo}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListProductoTitle_descripcion}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.descripcion}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value=""/>
+                                    </f:facet>
+
+                                    <h:commandLink action="#{productoController.prepareView}" value="">
+                                        <i class="fas fa-lg fa-eye"></i>
+                                    </h:commandLink>
+                                    <h:outputText value=" "/>
+                                    <h:commandLink action="#{productoController.prepareEdit}" value="">
+                                        <i class="fas fa-lg fa-edit"></i>
+                                    </h:commandLink>
+                                    <h:outputText value=" "/>
+                                    <h:commandLink action="#{productoController.destroy}" value="">
+                                        <i class="fas fa-lg fa-trash"></i>
+                                    </h:commandLink>
+                                </h:column>
+                            </h:dataTable>
+                        </h:panelGroup>
+                        <br />
+                    </div>
+                </div>
+        </ui:define>
+    </ui:composition>
+
+</section>

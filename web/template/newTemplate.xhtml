@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Tienda</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <ui:include src="component/css.xhtml"></ui:include>
+        <ui:insert name="css">
+        </ui:insert>
+    </h:head>
+    <h:body>
+        <div id="top">
+            <ui:insert name="nav">
+                <ui:include src="component/navbar.xhtml"></ui:include>
+            </ui:insert>
+        </div>
+        <div id="content" class="center_content">
+            <div id="carousel">
+                <ui:insert name="carousel">
+                    <ui:include src="component/carousel.xhtml"></ui:include>
+                </ui:insert>
+            </div>
+            <ui:insert name="content">
+            </ui:insert>
+        </div>
+        <div id="bottom">
+            <ui:insert name="footer">
+                <ui:include src="component/footer.xhtml"></ui:include>
+            </ui:insert>
+        </div> 
+        <ui:include src="component/js.xhtml"></ui:include>
+       
+        <ui:insert name="scrips"></ui:insert>
+    </h:body>
+</html>

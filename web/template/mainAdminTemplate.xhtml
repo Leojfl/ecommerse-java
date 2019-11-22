@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+        <f:event type="preRenderView" listener="#{sessionManagedBean1.checkSession(1)}" />
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <ui:include src="component/css_admin.xhtml"></ui:include>
+        <ui:insert name="css"></ui:insert>
+        
+        <title>Admin</title>
+    </h:head>
+    <h:body>
+        <h:form id="form-upsert"  enctype="multipart/form-data">
+            <div class="wrapper ">
+                <div class="sidebar" data-color="azure" data-background-color="white">
+                    <div class="logo">
+                        <span class="simple-text logo-mini">
+                            Administración  
+                        </span>
+                    </div>
+                    <div class="sidebar-wrapper">
+                        <ul class="nav">
+                            <li class="nav-item 
+                                #{(routeManagedBean.getUrlRoute('producto'))?'active':''}">
+                                <h:link  outcome="indexProduct" 
+                                         class="nav-link">
+                                    <i class="fas fa-pencil-ruler"></i>
+                                    <p>Productos</p>
+                                </h:link>
+                            </li>
+                            <li class="nav-item  
+                                #{(routeManagedBean.getUrlRoute('categoria'))?'active':''}">
+                                <h:link outcome="indexCategory" class="nav-link">
+                                    <i class="fas fa-angle-double-right"></i>
+                                    <p>Categorias</p>
+                                </h:link>
+                            </li>
+                            <li class="nav-item  
+                                #{(routeManagedBean.getUrlRoute('usuario'))?'active':''}"
+                                >
+                                <h:link  outcome="indexUser"
+                                         class="nav-link">
+                                    <i class="fas fa-user"></i>
+                                    <p>Usuarios</p>
+                                </h:link>
+                            </li>
+                            <li class="nav-item 
+                                #{(routeManagedBean.getUrlRoute('hola'))?'active':''}
+                                ">
+                                <a class="nav-link" href="#">
+                                    <i class="fas fa-money-check-alt"></i>
+                                    <p>Ordenes</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <h:commandLink 
+                                    rendered="#{sessionManagedBean1.getUsuarioLogin()!=null}"
+                                    action="#{sessionManagedBean1.logout}" 
+                                    class="nav-link">
+                                    <p>Cerrar sesión
+                                        <i class="fas fa-sign-out-alt"></i>
+                                    </p>
+                                </h:commandLink>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="main-panel">
+                    <!-- End Navbar -->
+                    <div class="content mt-3">
+                        <div class="container-fluid">
+                            <div id="content" class="center_content">
+                                <ui:insert name="content">Content</ui:insert>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </h:body>
+    <ui:include src="component/js.xhtml"></ui:include>
+    <ui:insert name="scrips">
+        
+    </ui:insert>
+</html>

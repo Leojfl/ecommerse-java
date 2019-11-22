@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="./../../../template/mainAdminTemplate.xhtml">
+        <ui:define name="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <h:commandLink action="#{categoriaController.prepareCreate}" value="Agregar categoria"/>
+                </div>
+                <div class="col-md-12">
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+                    <h:outputText escape="false" value="#{bundle.ListCategoriaEmpty}" rendered="#{categoriaController.items.rowCount == 0}"/>
+                    <table rendered="#{categoriaController.items.rowCount > 0}">
+                        <h:outputText value="#{categoriaController.pagination.pageFirstItem + 1}..#{categoriaController.pagination.pageLastItem + 1}/#{categoriaController.pagination.itemsCount}"/>&nbsp;
+                        <h:commandLink action="#{categoriaController.previous}" value="#{bundle.Previous} #{categoriaController.pagination.pageSize}" rendered="#{categoriaController.pagination.hasPreviousPage}"/>&nbsp;
+                        <h:commandLink action="#{categoriaController.next}" value="#{bundle.Next} #{categoriaController.pagination.pageSize}" rendered="#{categoriaController.pagination.hasNextPage}"/>&nbsp;
+                        <h:dataTable class="table table-striped" value="#{categoriaController.items}" var="item" border="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListCategoriaTitle_id}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.id}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListCategoriaTitle_valor}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.valor}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Estatus"/>
+                                </f:facet>
+                                <h:outputText value="#{item.activo}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="&nbsp;"/>
+                                </f:facet>
+                                <h:commandLink action="#{categoriaController.prepareView}" value=" ">
+                                    <i class="fas fa-lg fa-eye"></i>
+                                </h:commandLink>
+                                <h:outputText value=" "/>
+                              
+                         
+                                <h:outputText value=" "/>
+                                <h:commandLink action="#{categoriaController.destroy}" value=" ">
+                                    <i class="fas fa-lg fa-trash"></i>       
+                                </h:commandLink>
+                            </h:column>
+                        </h:dataTable>
+                    </table>
+                    <br />
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

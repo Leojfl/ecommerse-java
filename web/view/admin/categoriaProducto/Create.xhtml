@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateCategoriaProductoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateCategoriaProductoLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{categoriaProductoController.selected.id}" title="#{bundle.CreateCategoriaProductoTitle_id}" required="true" requiredMessage="#{bundle.CreateCategoriaProductoRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.CreateCategoriaProductoLabel_fkIdCategoria}" for="fkIdCategoria" />
+                    <h:selectOneMenu id="fkIdCategoria" value="#{categoriaProductoController.selected.fkIdCategoria}" title="#{bundle.CreateCategoriaProductoTitle_fkIdCategoria}" required="true" requiredMessage="#{bundle.CreateCategoriaProductoRequiredMessage_fkIdCategoria}">
+                        <f:selectItems value="#{categoriaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateCategoriaProductoLabel_fkIdProducto}" for="fkIdProducto" />
+                    <h:selectOneMenu id="fkIdProducto" value="#{categoriaProductoController.selected.fkIdProducto}" title="#{bundle.CreateCategoriaProductoTitle_fkIdProducto}" required="true" requiredMessage="#{bundle.CreateCategoriaProductoRequiredMessage_fkIdProducto}">
+                        <f:selectItems value="#{productoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{categoriaProductoController.create}" value="#{bundle.CreateCategoriaProductoSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{categoriaProductoController.prepareList}" value="#{bundle.CreateCategoriaProductoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateCategoriaProductoIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

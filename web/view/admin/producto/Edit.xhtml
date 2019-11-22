@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:composition template="./../../../template/mainAdminTemplate.xhtml">
+        <ui:define name="content">
+      <div class="row">
+                <div class="col-md-12 text-center">
+                    <h3>Editar producto</h3>
+                </div>
+                <div class="col-md-8 offset-md-2">
+                    <div class="card py-3">
+                        <div class="card-header">
+                            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                        </div>
+                        <div class="card-body">
+                            <h:form>
+                                <div class="row">
+                                    <div class="col-md-8 offset-md-2">
+                                        <div class="row">
+                                            <div class="col-md-12 form-group">
+                                                <h:outputLabel value="#{bundle.CreateProductoLabel_nombre}" for="nombre" />
+                                                <h:inputText id="nombre"
+                                                             value="#{productoController.selected.nombre}" 
+                                                             title="#{bundle.CreateProductoTitle_nombre}" 
+                                                             class="form-control"
+                                                             required="true" 
+                                                             requiredMessage="El nombre es requerido"/>
+                                            </div>
+                                            <div class="col-md-12 form-group">
+                                                <h:outputLabel value="#{bundle.CreateProductoLabel_precio}" for="precio" />
+                                                <h:inputText id="precio" 
+                                                             class="form-control"
+                                                             value="#{productoController.selected.precio}" 
+                                                             title="#{bundle.CreateProductoTitle_precio}" 
+                                                             required="true" 
+                                                             requiredMessage="Precio requerido"/>
+                                            </div>
+                                            <div class="col-md-12 form-group">
+                                                <h:outputLabel value="#{bundle.CreateProductoLabel_cantidad}" for="cantidad" />
+                                                <h:inputText id="cantidad" 
+                                                             value="#{productoController.selected.cantidad}" 
+                                                             title="#{bundle.CreateProductoTitle_cantidad}"
+                                                             class="form-control"
+                                                             required="true" 
+                                                             requiredMessage="Cantidad requerida"/>
+                                            </div>
+                                            <div class="col-md-12 form-group">
+                                                <h:outputLabel value="#{bundle.CreateProductoLabel_descripcion}" for="descripcion" />
+                                                <h:inputText id="descripcion" 
+                                                             value="#{productoController.selected.descripcion}" 
+                                                             title="#{bundle.CreateProductoTitle_descripcion}" 
+                                                             class="form-control"
+                                                             required="true" 
+                                                             requiredMessage="Descripción requerida"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </h:form>
+                            <div class="col-md-12 text-center">
+                                <h:commandLink 
+                                    class="btn btn-primary"
+                                    action="#{productoController.update}" 
+                                    value="Guardar" />  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

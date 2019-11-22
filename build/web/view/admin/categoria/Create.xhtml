@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="./../../../template/mainAdminTemplate.xhtml">
+        <ui:define name="content">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h3>Nueva categoria</h3>
+                </div>
+            </div>
+            <div class="card py-3">
+                <div class="card-header text-center">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" />
+                </div>
+                <div class="body-card">
+                    <h:form>
+                        <div class="row">
+                            <div class="col-md-8 offset-2"> 
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <h:outputLabel value="ID" for="id" />
+                                            <h:inputText id="id" 
+                                                         value="#{categoriaController.selected.id}" 
+                                                         class="form-control"
+                                                         title="#{bundle.CreateCategoriaTitle_id}" 
+                                                         requiredMessage="#{bundle.CreateCategoriaRequiredMessage_id}"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <h:outputLabel value="#{bundle.CreateCategoriaLabel_valor}" for="valor" />
+                                            <h:inputText id="valor" 
+                                                         class="form-control"
+                                                         value="#{categoriaController.selected.valor}" 
+                                                         title="#{bundle.CreateCategoriaTitle_valor}" 
+                                                         requiredMessage="#{bundle.CreateCategoriaRequiredMessage_valor}"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <h:outputLabel value="#{bundle.CreateCategoriaLabel_activo}" for="activo" />
+                                            <h:inputText id="activo"
+                                                         class="form-control"                                         
+                                                         value="#{categoriaController.selected.activo}" 
+                                                         title="#{bundle.CreateCategoriaTitle_activo}" 
+                                                         requiredMessage="#{bundle.CreateCategoriaRequiredMessage_activo}"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <h:outputLabel value="#{bundle.CreateCategoriaLabel_fkIdCategoria}"
+                                                           for="fkIdCategoria" />
+                                            <h:selectOneMenu id="fkIdCategoria" 
+                                                             class="form-control"     
+                                                             value="#{categoriaController.selected.fkIdCategoria}" 
+                                                             title="#{bundle.CreateCategoriaTitle_fkIdCategoria}" >
+                                                <f:selectItems value="#{categoriaController.itemsAvailableSelectOne}"/>
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </h:form>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h:commandLink class="btn btn-primary"
+                                           action="#{categoriaController.create}" 
+                                           value="Guardar" />
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </ui:define>
+    </ui:composition>
+</html>

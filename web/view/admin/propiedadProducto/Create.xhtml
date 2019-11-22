@@ -1,0 +1,41 @@
+  <?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreatePropiedadProductoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreatePropiedadProductoLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{propiedadProductoController.selected.id}" title="#{bundle.CreatePropiedadProductoTitle_id}" required="true" requiredMessage="#{bundle.CreatePropiedadProductoRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.CreatePropiedadProductoLabel_valor}" for="valor" />
+                    <h:inputText id="valor" value="#{propiedadProductoController.selected.valor}" title="#{bundle.CreatePropiedadProductoTitle_valor}" required="true" requiredMessage="#{bundle.CreatePropiedadProductoRequiredMessage_valor}"/>
+                    <h:outputLabel value="#{bundle.CreatePropiedadProductoLabel_fkIdPropiedad}" for="fkIdPropiedad" />
+                    <h:selectOneMenu id="fkIdPropiedad" value="#{propiedadProductoController.selected.fkIdPropiedad}" title="#{bundle.CreatePropiedadProductoTitle_fkIdPropiedad}" required="true" requiredMessage="#{bundle.CreatePropiedadProductoRequiredMessage_fkIdPropiedad}">
+                        <f:selectItems value="#{propiedadController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreatePropiedadProductoLabel_fkIdProducto}" for="fkIdProducto" />
+                    <h:selectOneMenu id="fkIdProducto" value="#{propiedadProductoController.selected.fkIdProducto}" title="#{bundle.CreatePropiedadProductoTitle_fkIdProducto}" required="true" requiredMessage="#{bundle.CreatePropiedadProductoRequiredMessage_fkIdProducto}">
+                        <f:selectItems value="#{productoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{propiedadProductoController.create}" value="#{bundle.CreatePropiedadProductoSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{propiedadProductoController.prepareList}" value="#{bundle.CreatePropiedadProductoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreatePropiedadProductoIndexLink}"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

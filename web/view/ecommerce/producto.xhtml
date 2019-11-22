@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<section xmlns="http://www.w3.org/1999/xhtml"
+         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+         xmlns:h="http://xmlns.jcp.org/jsf/html"
+         xmlns:f="http://xmlns.jcp.org/jsf/core"
+         xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <ui:composition template="./../../template/newTemplate.xhtml">
+        <ui:define  name="carousel"></ui:define>
+        <ui:define name="content" class="mb-1" >
+            <div class="row pt-5 mx-0 mt-4 mb-1">
+                <div class="col-md-6 mx-auto ">
+                    <div class="card shadow py-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 text-center mt-2">
+                                    <h3>
+                                        #{productoController.selected.nombre}
+                                    </h3>
+                                </div>
+                                <div class="col-md-10 mx-auto">
+                                   #{productoController.selected.descripcion} 
+                                </div>
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</section>
