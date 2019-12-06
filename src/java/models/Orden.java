@@ -35,13 +35,17 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Orden.findAll", query = "SELECT o FROM Orden o")
     , @NamedQuery(name = "Orden.findById", query = "SELECT o FROM Orden o WHERE o.id = :id")
+    , @NamedQuery(name = "Orden.clientStatatus", query = "SELECT o FROM Orden o WHERE  o.status = :status")
     , @NamedQuery(name = "Orden.findByFecha", query = "SELECT o FROM Orden o WHERE o.fecha = :fecha")})
 public class Orden implements Serializable {
 
+    @Basic(optional = true)
+    @Column(name = "status")
+    private int status;
+    
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @NotNull
+    @Basic(optional = true)
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
@@ -123,6 +127,15 @@ public class Orden implements Serializable {
     @Override
     public String toString() {
         return "models.Orden[ id=" + id + " ]";
+    }
+
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
     
 }

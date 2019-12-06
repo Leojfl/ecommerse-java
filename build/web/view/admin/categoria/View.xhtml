@@ -14,29 +14,30 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewCategoriaLabel_id}"/>
-                    <h:outputText value="#{categoriaController.selected.id}" title="#{bundle.ViewCategoriaTitle_id}"/>
-                    <h:outputText value="#{bundle.ViewCategoriaLabel_valor}"/>
-                    <h:outputText value="#{categoriaController.selected.valor}" title="#{bundle.ViewCategoriaTitle_valor}"/>
-                    <h:outputText value="#{bundle.ViewCategoriaLabel_activo}"/>
-                    <h:outputText value="#{categoriaController.selected.activo}" title="#{bundle.ViewCategoriaTitle_activo}"/>
-                    <h:outputText value="#{bundle.ViewCategoriaLabel_fkIdCategoria}"/>
-                    <h:outputText value="#{categoriaController.selected.fkIdCategoria}" title="#{bundle.ViewCategoriaTitle_fkIdCategoria}"/>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{categoriaController.destroyAndView}" value="#{bundle.ViewCategoriaDestroyLink}"/>
-                <br />
-                <br />
-                <h:link outcome="Edit" value="#{bundle.ViewCategoriaEditLink}"/>
-                <br />
-                <h:commandLink action="#{categoriaController.prepareCreate}" value="#{bundle.ViewCategoriaCreateLink}" />
-                <br />
-                <h:commandLink action="#{categoriaController.prepareList}" value="#{bundle.ViewCategoriaShowAllLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ViewCategoriaIndexLink}"/>
+                <div class="row">
+                    <div class="col-md-8 mx-auto">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <b> <h:outputText value="#{bundle.ViewCategoriaLabel_id}"/>  </b>
+                                        <h:outputText value="#{categoriaController.selected.id}" title="#{bundle.ViewCategoriaTitle_id}"/>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <b><h:outputText value="Nombre"/>: </b>
+                                        <h:outputText value="#{categoriaController.selected.valor}" title="#{bundle.ViewCategoriaTitle_valor}"/>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <b> <h:outputText value="#{bundle.ViewCategoriaLabel_activo}"/> </b>
+                                        <h:outputText value="#{categoriaController.selected.activo}" title="#{bundle.ViewCategoriaTitle_activo}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
+                    </div>
+
+                </div>
             </h:form>
         </ui:define>
     </ui:composition>

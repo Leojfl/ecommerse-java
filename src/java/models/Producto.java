@@ -6,6 +6,7 @@
 package models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import javax.persistence.Basic;
@@ -110,6 +111,16 @@ public class Producto implements Serializable {
             img = it.next();
         }
         return img;
+    }
+
+    public ArrayList<Imagen> getImages() {
+
+        Iterator<Imagen> it = imagenCollection.iterator();
+        ArrayList list = new ArrayList();
+        while (it.hasNext()) {
+            list.add(it.next());
+        }
+        return list;
     }
 
     public Integer getId() {

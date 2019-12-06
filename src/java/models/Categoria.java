@@ -39,8 +39,7 @@ public class Categoria implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @NotNull
+    @Basic(optional = true)
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)

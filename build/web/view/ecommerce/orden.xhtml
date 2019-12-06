@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xmlns="http://www.w3.org/1999/xhtml"
+         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+         xmlns:h="http://xmlns.jcp.org/jsf/html"
+         xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="./../../template/newTemplate.xhtml">
+        <ui:define  name="carousel"></ui:define>
+        <ui:define name="content" class="mb-1" >
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Ordenes</h2>
+                    </div>
+                    <div class="col-md-12 mt-3">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h3>Numero de orden:#{ordenController.getSelected().id}</h3>
+                            </div>
+                            <div class="col-md-6">
+                                <h4>Total: $#{ordenController.totalOrder(ordenController.getSelected())}</h4>    
+                            </div>
+                            <div   class="col-md-12">
+                                <h:dataTable class="table table-striped" 
+                                             value="#{ordenController.getSelected().productoOrdenCollection}" 
+                                             var="item" 
+                                             border="0" 
+                                             cellpadding="2" 
+                                             cellspacing="0" 
+                                             rowClasses="jsfcrud_odd_row,jsfcrud_even_row" 
+                                             rules="all" 
+                                             style="border:solid 1px">
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Producto"/>
+                                        </f:facet>
+                                        <img class="w-100" src="#{item.getFkIdProducto().getImage().getUrl()}"/>
+
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Producto"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.getFkIdProducto().getNombre()}"/>
+                                    </h:column>
+                                   
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Precio"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.precio}"/>
+                                    </h:column>
+                                </h:dataTable>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</section>

@@ -5,7 +5,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-     <ui:composition template="./../../../template/mainAdminTemplate.xhtml">
+    <ui:composition template="./../../../template/mainAdminTemplate.xhtml">
         <ui:define name="title">
             <h:outputText value="#{bundle.ViewProductoTitle}"></h:outputText>
         </ui:define>
@@ -13,37 +13,57 @@
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
-     
-                <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewProductoLabel_id}"/>
-                    <h:outputText value="#{productoController.selected.id}" title="#{bundle.ViewProductoTitle_id}"/>
-                    <h:outputText value="#{bundle.ViewProductoLabel_precio}"/>
-                    <h:outputText value="#{productoController.selected.precio}" title="#{bundle.ViewProductoTitle_precio}"/>
-                    <h:outputText value="#{bundle.ViewProductoLabel_cantidad}"/>
-                    <h:outputText value="#{productoController.selected.cantidad}" title="#{bundle.ViewProductoTitle_cantidad}"/>
-                    <h:outputText value="#{bundle.ViewProductoLabel_activo}"/>
-                    <h:outputText value="#{productoController.selected.activo}" title="#{bundle.ViewProductoTitle_activo}"/>
-                    <h:outputText value="#{bundle.ViewProductoLabel_descripcion}"/>
-                    <h:outputText value="#{productoController.selected.descripcion}" title="#{bundle.ViewProductoTitle_descripcion}"/>
-                    <h:outputText value="#{bundle.ViewProductoLabel_nombre}"/>
-                    <h:outputText value="#{productoController.selected.nombre}" title="#{bundle.ViewProductoTitle_nombre}"/>
-                    <h:outputText value="#{bundle.ViewProductoLabel_fkIdUsuario}"/>
-                    <h:outputText value="#{productoController.selected.fkIdUsuario}" title="#{bundle.ViewProductoTitle_fkIdUsuario}"/>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{productoController.destroyAndView}" value="#{bundle.ViewProductoDestroyLink}"/>
-                <br />
-                <br />
-                <h:link outcome="Edit" value="#{bundle.ViewProductoEditLink}"/>
-                <br />
-                <h:commandLink action="#{productoController.prepareCreate}" value="#{bundle.ViewProductoCreateLink}" />
-                <br />
-                <h:commandLink action="#{productoController.prepareList}" value="#{bundle.ViewProductoShowAllLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ViewProductoIndexLink}"/>
 
-      
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row ">
+                                <div class="col-md-12 text-center">
+                                    <h3><b>Producto: #{productoController.selected.nombre}</b></h3>
+                                </div>
+                                <div class="col-md-12">
+                                    <b>  <h:outputText value="#{bundle.ViewProductoLabel_id}"/></b>
+                                    <h:outputText value="#{productoController.selected.id}" title="#{bundle.ViewProductoTitle_id}"/>
+                                </div>
+                                <div class="col-md-12">
+                                    <b>  <h:outputText value="#{bundle.ViewProductoLabel_precio}"/></b>
+                                    <h:outputText value="#{productoController.selected.precio}" title="#{bundle.ViewProductoTitle_precio}"/>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <b>  <h:outputText value="#{bundle.ViewProductoLabel_cantidad}"/></b>
+                                    <h:outputText value="#{productoController.selected.cantidad}" title="#{bundle.ViewProductoTitle_cantidad}"/>
+
+
+                                </div>
+
+                                <div class="col-md-12">
+                                    <b>  <h:outputText value="#{bundle.ViewProductoLabel_activo}"/></b>
+                                    <h:outputText value="#{productoController.selected.activo}" title="#{bundle.ViewProductoTitle_activo}"/>
+
+                                </div>
+
+                                <div class="col-md-12">
+                                    <b>  <h:outputText value="#{bundle.ViewProductoLabel_descripcion}"/></b>
+                                    <h:outputText value="#{productoController.selected.descripcion}" title="#{bundle.ViewProductoTitle_descripcion}"/>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <ui:repeat value="#{productoController.selected.imagenCollection}" var="img">
+                                            <div class="col-md-6">
+                                                <img class="w-100"  src="#{img.url}"></img>
+                                            </div>
+                                        </ui:repeat> 
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </ui:define>
     </ui:composition>
 

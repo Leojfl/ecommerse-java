@@ -1,11 +1,15 @@
 package controllers;
 
 import bean.ImagenFacade;
+import bean.OrdenFacade;
 import models.Producto;
 import controllers.util.JsfUtil;
 import controllers.util.PaginationHelper;
 import bean.ProductoFacade;
+import bean.ProductoOrdenFacade;
+import bean.UsuarioFacade;
 import beanManager.RouteManagedBean;
+import beanManager.SessionManagedBean;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,6 +18,7 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.annotation.PreDestroy;
@@ -32,8 +37,12 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import models.CategoriaProducto;
 import models.Imagen;
+import models.Orden;
+import models.ProductoOrden;
+import models.Usuario;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
+import sun.security.pkcs11.P11TlsKeyMaterialGenerator;
 
 @Named("productoController")
 @SessionScoped
@@ -45,15 +54,55 @@ public class ProductoController implements Serializable {
     private UploadedFile file;
     private final ArrayList files;
     private DataModel items;
+    private DataModel orderCard;
     @EJB
     private bean.ProductoFacade ejbFacade;
     @EJB
     private bean.ImagenFacade imgFacade;
+    @EJB
+    private bean.OrdenFacade orderFacade;
+    @EJB
+    private bean.UsuarioFacade userFacade;
+    @EJB
+    private bean.ProductoOrdenFacade productOrderFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private Producto selectedProduct;
+    private Collection<Orden> userOrders;
 
     public ProductoController() {
         files = new ArrayList();
+    }
+
+    public ProductoFacade getEjbFacade() {
+        return ejbFacade;
+    }
+
+    public void setEjbFacade(ProductoFacade ejbFacade) {
+        this.ejbFacade = ejbFacade;
+    }
+
+    public UsuarioFacade getUserFacade() {
+        if (userFacade == null) {
+            userFacade = new UsuarioFacade();
+        }
+        return userFacade;
+    }
+
+    public void setUserFacade(UsuarioFacade userFacade) {
+        this.userFacade = userFacade;
+    }
+
+    public OrdenFacade getOrderFacade() {
+        if (orderFacade == null) {
+            orderFacade = new OrdenFacade();
+        }
+
+        return orderFacade;
+    }
+
+    public void setOrderFacade(OrdenFacade orderFacade) {
+        this.orderFacade = orderFacade;
     }
 
     public UploadedFile getFile() {
@@ -62,6 +111,36 @@ public class ProductoController implements Serializable {
 
     public void setFile(UploadedFile file) {
         this.file = file;
+    }
+
+    public Producto getSelectedProduct() {
+        return selectedProduct;
+    }
+
+    public void setSelectedProduct(Producto selectedProduct) {
+        this.selectedProduct = selectedProduct;
+    }
+
+    public ProductoOrdenFacade getProductOrderFacade() {
+        if (productOrderFacade == null) {
+            productOrderFacade = new ProductoOrdenFacade();
+        }
+        return productOrderFacade;
+    }
+
+    public void setProductOrderFacade(ProductoOrdenFacade productOrderFacade) {
+        this.productOrderFacade = productOrderFacade;
+    }
+
+    public Collection<Orden> getUserOrders() {
+        Usuario user = SessionManagedBean.user;
+
+        userOrders = null;
+        if (user != null) {
+            user = getUserFacade().find(SessionManagedBean.user.getId());
+            userOrders = user.getOrdenCollection();
+        }
+        return userOrders;
     }
 
     public Producto getSelected() {
@@ -121,6 +200,7 @@ public class ProductoController implements Serializable {
     public String prepareCreate() {
         current = new Producto();
         selectedItemIndex = -1;
+        files.clear();
         return "Create" + RouteManagedBean.redirect;
     }
 
@@ -131,10 +211,13 @@ public class ProductoController implements Serializable {
             if (files.size() > 0) {
                 getFacade().create(current);
                 List<Producto> list = getFacade().findAll();
-                Producto product = list.get(list.size()-1);
+                Producto product = list.get(list.size() - 1);
                 InputStream inputStream;
                 OutputStream outputStream;
-                /******The correct form is update the relation in model Product ********/
+                /**
+                 * ****The correct form is update the relation in model Product
+                 * *******
+                 */
 //                Collection<Imagen> collectionImg= new ArrayList<>();
                 String parentPath = "C:/Users/leojf/OneDrive/Documents/NetBeansProjects/FinalProjectJava/web/resources/img/";
                 for (int x = 0; x < files.size(); x++) {
@@ -152,6 +235,7 @@ public class ProductoController implements Serializable {
                         outputStream.write(bytes, 0, read);
                     }
                     getImgFacade().create(modelImg);
+                    items = null;
                 }
                 JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ProductoCreated"));
                 return prepareCreate();
@@ -238,11 +322,30 @@ public class ProductoController implements Serializable {
     }
 
     public DataModel getItems() {
-        items = null;
+
         if (items == null) {
             items = getPagination().createPageDataModel();
         }
         return items;
+    }
+
+    public Orden getOrderCard() {
+        Usuario user = SessionManagedBean.user;
+        Orden order = null;
+
+        if (user != null) {
+            user = getUserFacade().find(SessionManagedBean.user.getId());
+            Collection<Orden> orders = getOrderFacade().findAll();
+            if (orders.size() > 0) {
+                for (Orden orderUser : orders) {
+                    if (orderUser.getStatus() == 1 && orderUser.getFkIdUsuario().getId() == user.getId()) {
+                        order = orderUser;
+                        break;
+                    }
+                }
+            }
+        }
+        return order;
     }
 
     private void recreateModel() {
@@ -275,6 +378,82 @@ public class ProductoController implements Serializable {
 
     public Producto getProducto(java.lang.Integer id) {
         return ejbFacade.find(id);
+    }
+
+    public String addCart(Producto product) {
+        String success = "true";
+        Usuario user = SessionManagedBean.user;
+        if (product.getCantidad() > 0) {
+            if (user == null) {
+                JsfUtil.addErrorMessage("Inicie sesión por favor");
+            } else {
+                user = getUserFacade().find(user.getId());
+                Collection<Orden> list = getOrderFacade().findAll();
+                Orden userOrder = null;
+                ProductoOrden newProducto = new ProductoOrden();
+                newProducto.setCantidad(1);
+                newProducto.setPrecio(product.getPrecio());
+                newProducto.setFkIdProducto(product);
+
+                for (Orden order : list) {
+                    if (order.getStatus() == 1 && order.getFkIdUsuario().getId() == user.getId()) {
+                        userOrder = order;
+                        break;
+                    }
+                }
+
+                if (userOrder == null) {
+                    userOrder = new Orden();
+                    userOrder.setStatus(1);
+                    userOrder.setFecha(new Date());
+                    userOrder.setFkIdUsuario(user);
+                    getOrderFacade().create(userOrder);
+                    List<Orden> orders = getOrderFacade().findAll();
+                    for (int i = 0; i < orders.size(); i++) {
+                        userOrder = orders.get(i);
+                    }
+                    newProducto.setFkIdOrden(userOrder);
+                    getProductOrderFacade().create(newProducto);
+                } else {
+                    Collection<ProductoOrden> productsOrder = userOrder.getProductoOrdenCollection();
+                    productsOrder.add(newProducto);
+                    newProducto.setFkIdOrden(userOrder);
+                    newProducto.setFkIdOrden(userOrder);
+                    getProductOrderFacade().create(newProducto);
+                    userOrder.setProductoOrdenCollection(productsOrder);
+                    getOrderFacade().edit(userOrder);
+                }
+                product.setCantidad(product.getCantidad() - 1);
+                getFacade().edit(product);
+                JsfUtil.addSuccessMessage("Producto agregado al carrito");
+            }
+        } else {
+            JsfUtil.addErrorMessage("Producto agotado");
+        }
+        return success;
+    }
+
+    public void confirOrder() throws IOException {
+        Orden order = getOrderCard();
+        String redirect = "/FinalProjectJava/faces/view/ecommerce/carrito.xhtml";
+        if (order != null) {
+            order.setStatus(2);
+            getOrderFacade().edit(order);
+            redirect = "/FinalProjectJava/faces/view/ecommerce/ordenes.xhtml";
+        }
+        FacesContext
+                .getCurrentInstance()
+                .getExternalContext()
+                .redirect(redirect);
+    }
+
+    public double totalOrder(Orden order) {
+        Collection<ProductoOrden> products = order.getProductoOrdenCollection();
+        double total = 0;
+        for (ProductoOrden product : products) {
+            total += product.getPrecio();
+        }
+        return total;
     }
 
     @FacesConverter(forClass = Producto.class)

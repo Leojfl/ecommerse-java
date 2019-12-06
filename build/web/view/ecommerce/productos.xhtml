@@ -7,6 +7,7 @@
         <ui:define  name="carousel"></ui:define>
         <ui:define name="content" class="mb-1 mt-3" >
             <h:form id="form" class="mt-3">
+                <p:growl id="growl" showDetail="true" sticky="true" />  
                 <p:dataGrid var="product" 
                             value="#{productoController.getItems()}" 
                             columns="3" 
@@ -31,16 +32,25 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="row text-right" style="    font-size: 16px;">
-                                        <div class="col-md-12 mt-2 ">
-                                            <button class="btn btn-primary ">
-                                                Agregar al carrito
-
-                                            </button>
+                                        <div class="col-md-12 mt-2  ">
+                                            <h:commandButton value="Agregar al carrito"
+                                                             class="btn btn-success  btn-block">
+                                                <f:ajax
+                                                    event="click"
+                                                    render="form"
+                                                    rendered="form"
+                                                    listener="#{productoController.addCart(product)}" 
+                                                    />
+                                            </h:commandButton>
                                         </div>
-                                        <div class="col-md-12 mt-2">
-                                            <button class="btn btn-secondary">
-                                                Ver detalles
-                                            </button>
+                                        <div class="col-md-12 mt-2 text-right">
+                                            <p:commandLink class="text-center text-white btn-primary btn  btn-block"
+                                                           update=":form:carDetail" 
+                                                           oncomplete="PF('carDialog').show()" 
+                                                           title="Ver">
+                                                Ver
+                                                <f:setPropertyActionListener value="#{product}" target="#{productoController.selectedProduct}" />
+                                            </p:commandLink>
                                         </div>
                                     </div>
                                 </div>
@@ -49,24 +59,25 @@
                     </p:panel>
 
                 </p:dataGrid>
-                <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:dialog header="" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
                     <p:outputPanel id="carDetail" style="text-align:center;">
-                        <p:panelGrid  columns="2" rendered="#{not empty dataGridView.selectedCar}" columnClasses="label,value">
-                            <f:facet name="header">
-                                <p:graphicImage name="demo/images/car/#{dataGridView.selectedCar.brand}-big.gif"/> 
-                            </f:facet>
+                        <p:panelGrid  rendered="#{not empty productoController.selectedProduct}">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <img src="#{productoController.selectedProduct.image.url}"/>
 
-                            <h:outputText value="Id:" />
-                            <h:outputText value="#{dataGridView.selectedCar.id}" />
+                                </div>
+                                <div class="col-md-12">
 
-                            <h:outputText value="Year" />
-                            <h:outputText value="#{dataGridView.selectedCar.year}" />
+                                    <h:outputText value="Id:" />
+                                    <h:outputText value="#{productoController.selectedProduct.id}" />
+                                </div>
+                                <div class="col-md-12">
 
-                            <h:outputText value="Color:" />
-                            <h:outputText value="#{dataGridView.selectedCar.color}" style="color:#{dataGridView.selectedCar.color}"/>
-
-                            <h:outputText value="Price" />
-                            <h:outputText value="$#{dataGridView.selectedCar.price}" />
+                                    <h:outputText value="Price" />
+                                    <h:outputText value="$#{productoController.selectedProduct.precio}" />
+                                </div>
+                            </div>
                         </p:panelGrid>
                     </p:outputPanel>
                 </p:dialog>

@@ -5,10 +5,12 @@
  */
 package bean;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import models.Orden;
+import models.Usuario;
 
 /**
  *
@@ -27,6 +29,13 @@ public class OrdenFacade extends AbstractFacade<Orden> {
 
     public OrdenFacade() {
         super(Orden.class);
+    }
+    
+      public List<Orden> order(Usuario usu, int status) {
+        return getEntityManager().createNamedQuery("Orden.clientStatatus")
+               // .setParameter("userId", usu.getId())
+                .setParameter("status", status)
+                .getResultList();
     }
     
 }

@@ -83,6 +83,7 @@ public class CategoriaController implements Serializable {
     public String create() {
         try {
             getFacade().create(current);
+            items = null;
             JsfUtil.addSuccessMessage(
                     ResourceBundle
                             .getBundle("/Bundle")
@@ -118,6 +119,7 @@ public class CategoriaController implements Serializable {
         performDestroy();
         recreatePagination();
         recreateModel();
+        selectedItemIndex = -1;
         return "List";
     }
 

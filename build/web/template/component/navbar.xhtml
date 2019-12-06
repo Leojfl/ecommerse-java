@@ -69,9 +69,18 @@
                         class="nav-link">
                         Hola, #{sessionManagedBean1.getUsuarioLogin().nombre}
                     </h:link>
+                </li> 
+                <li class="nav-item" >
+                    <h:link  
+                        rendered="#{sessionManagedBean1.getUsuarioLogin()!=null}"
+                        outcome="order" 
+                        class="nav-link">
+                        Ordenes
+                    </h:link>
                 </li>
                 <li class="nav-item">
                     <h:link  
+                        rendered="#{sessionManagedBean1.getUsuarioLogin()!=null}"
                         outcome="car" 
                         class="nav-link">
                         <i class="fas fa-shopping-cart">

@@ -2,6 +2,15 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/leojf/OneDrive/Documents/NetBeansProjects/FinalProjectJava/src/java/controllers/ProductoController.java</file>
+            <file>file:/C:/Users/leojf/OneDrive/Documents/NetBeansProjects/FinalProjectJava/src/java/controllers/OrdenController.java</file>
+            <file>file:/C:/Users/leojf/OneDrive/Documents/NetBeansProjects/FinalProjectJava/web/view/admin/orden/View.xhtml</file>
+            <file>file:/C:/Users/leojf/OneDrive/Documents/NetBeansProjects/FinalProjectJava/web/view/ecommerce/ordenes.xhtml</file>
+            <file>file:/C:/Users/leojf/OneDrive/Documents/NetBeansProjects/FinalProjectJava/web/view/admin/usuario/List.xhtml</file>
+            <file>file:/C:/Users/leojf/OneDrive/Documents/NetBeansProjects/FinalProjectJava/web/view/ecommerce/orden.xhtml</file>
+            <file>file:/C:/Users/leojf/OneDrive/Documents/NetBeansProjects/FinalProjectJava/web/view/admin/orden/List.xhtml</file>
+            <file>file:/C:/Users/leojf/OneDrive/Documents/NetBeansProjects/FinalProjectJava/web/view/admin/usuario/View.xhtml</file>
+        </group>
     </open-files>
 </project-private>

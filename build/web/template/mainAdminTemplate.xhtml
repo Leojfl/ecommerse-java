@@ -50,12 +50,13 @@
                                 </h:link>
                             </li>
                             <li class="nav-item 
-                                #{(routeManagedBean.getUrlRoute('hola'))?'active':''}
+                                #{(routeManagedBean.getUrlRoute('orden'))?'active':''}
                                 ">
-                                <a class="nav-link" href="#">
+                                  <h:link  outcome="indexOrder"
+                                         class="nav-link">
                                     <i class="fas fa-money-check-alt"></i>
                                     <p>Ordenes</p>
-                                </a>
+                                  </h:link>
                             </li>
                             <li class="nav-item">
                                 <h:commandLink 

@@ -14,35 +14,45 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewUsuarioLabel_id}"/>
-                    <h:outputText value="#{usuarioController.selected.id}" title="#{bundle.ViewUsuarioTitle_id}"/>
-                    <h:outputText value="#{bundle.ViewUsuarioLabel_nombre}"/>
-                    <h:outputText value="#{usuarioController.selected.nombre}" title="#{bundle.ViewUsuarioTitle_nombre}"/>
-                    <h:outputText value="#{bundle.ViewUsuarioLabel_apellidos}"/>
-                    <h:outputText value="#{usuarioController.selected.apellidos}" title="#{bundle.ViewUsuarioTitle_apellidos}"/>
-                    <h:outputText value="#{bundle.ViewUsuarioLabel_correo}"/>
-                    <h:outputText value="#{usuarioController.selected.correo}" title="#{bundle.ViewUsuarioTitle_correo}"/>
-                    <h:outputText value="#{bundle.ViewUsuarioLabel_alias}"/>
-                    <h:outputText value="#{usuarioController.selected.alias}" title="#{bundle.ViewUsuarioTitle_alias}"/>
-                    <h:outputText value="#{bundle.ViewUsuarioLabel_activo}"/>
-                    <h:outputText value="#{usuarioController.selected.activo}" title="#{bundle.ViewUsuarioTitle_activo}"/>
-                    <h:outputText value="#{bundle.ViewUsuarioLabel_fkIdRol}"/>
-                    <h:outputText value="#{usuarioController.selected.fkIdRol}" title="#{bundle.ViewUsuarioTitle_fkIdRol}"/>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{usuarioController.destroyAndView}" value="#{bundle.ViewUsuarioDestroyLink}"/>
-                <br />
-                <br />
-                <h:link outcome="Edit" value="#{bundle.ViewUsuarioEditLink}"/>
-                <br />
-                <h:commandLink action="#{usuarioController.prepareCreate}" value="#{bundle.ViewUsuarioCreateLink}" />
-                <br />
-                <h:commandLink action="#{usuarioController.prepareList}" value="#{bundle.ViewUsuarioShowAllLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ViewUsuarioIndexLink}"/>
+                <div class="row">
+                    <div class="col-md-8 mx-auto">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="col-12">
 
+                                    <div class="col-md-12">
+                                        <b><h:outputText value="#{bundle.ViewUsuarioLabel_id}"/> </b>
+                                        <h:outputText value="#{usuarioController.selected.id}" title="#{bundle.ViewUsuarioTitle_id}"/>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <b><h:outputText value="#{bundle.ViewUsuarioLabel_nombre}"/> </b>
+                                        <h:outputText value="#{usuarioController.selected.nombre}" title="#{bundle.ViewUsuarioTitle_nombre}"/>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <b><h:outputText value="#{bundle.ViewUsuarioLabel_apellidos}"/> </b>
+                                        <h:outputText value="#{usuarioController.selected.apellidos}" title="#{bundle.ViewUsuarioTitle_apellidos}"/>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <b><h:outputText value="#{bundle.ViewUsuarioLabel_correo}"/> </b>
+                                        <h:outputText value="#{usuarioController.selected.correo}" title="#{bundle.ViewUsuarioTitle_correo}"/>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <b><h:outputText value="#{bundle.ViewUsuarioLabel_alias}"/> </b>
+                                        <h:outputText value="#{usuarioController.selected.alias}" title="#{bundle.ViewUsuarioTitle_alias}"/>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <b><h:outputText value="#{bundle.ViewUsuarioLabel_activo}"/> </b>
+                                        <h:outputText value="#{usuarioController.selected.activo}" title="#{bundle.ViewUsuarioTitle_activo}"/>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <b><h:outputText value="#{bundle.ViewUsuarioLabel_fkIdRol}"/> </b>
+                                        <h:outputText value="#{usuarioController.selected.fkIdRol}" title="#{bundle.ViewUsuarioTitle_fkIdRol}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </h:form>
         </ui:define>
     </ui:composition>

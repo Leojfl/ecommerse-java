@@ -34,8 +34,7 @@ public class ProductoOrden implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @NotNull
+    @Basic(optional = true)
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
@@ -47,10 +46,10 @@ public class ProductoOrden implements Serializable {
     @Column(name = "precio")
     private double precio;
     @JoinColumn(name = "fk_id_producto", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     private Producto fkIdProducto;
     @JoinColumn(name = "fk_id_orden", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     private Orden fkIdOrden;
 
     public ProductoOrden() {

@@ -39,8 +39,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Usuario.findByCorreo", query = "SELECT u FROM Usuario u WHERE u.correo = :correo")
     , @NamedQuery(name = "Usuario.findByAlias", query = "SELECT u FROM Usuario u WHERE u.alias = :alias")
     , @NamedQuery(name = "Usuario.validar", query = "SELECT u FROM Usuario u WHERE u.username = :username and u.password = :password")
-    , @NamedQuery(name = "Usuario.validarUsername", query = "SELECT u FROM Usuario u WHERE u.username = :username")
-   , @NamedQuery(name = "Usuario.findByActivo", query = "SELECT u FROM Usuario u WHERE u.activo = :activo")})
+    , @NamedQuery(name = "Usuario.validarUsername", query = "SELECT u FROM Usuario u WHERE u.username = :username")})
 
 public class Usuario implements Serializable {
 
@@ -206,7 +205,12 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "models.Usuario[ id=" + id + " ]";
+        String rol ="Cliente";
+        if(id == 1){
+            rol= "administrador";
+        }
+        
+        return "Rol" + rol;
     }
 
     public String getPassword() {

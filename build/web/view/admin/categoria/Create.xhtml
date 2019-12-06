@@ -20,7 +20,7 @@
                         <div class="row">
                             <div class="col-md-8 offset-2"> 
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 d-none">
                                         <div class="form-group">
                                             <h:outputLabel value="ID" for="id" />
                                             <h:inputText id="id" 
@@ -40,17 +40,17 @@
                                                          requiredMessage="#{bundle.CreateCategoriaRequiredMessage_valor}"/>
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 d-none">
                                         <div class="form-group">
                                             <h:outputLabel value="#{bundle.CreateCategoriaLabel_activo}" for="activo" />
                                             <h:inputText id="activo"
                                                          class="form-control"                                         
-                                                         value="#{categoriaController.selected.activo}" 
+                                                         value="true" 
                                                          title="#{bundle.CreateCategoriaTitle_activo}" 
                                                          requiredMessage="#{bundle.CreateCategoriaRequiredMessage_activo}"/>
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 d-none">
                                         <div class="form-group">
                                             <h:outputLabel value="#{bundle.CreateCategoriaLabel_fkIdCategoria}"
                                                            for="fkIdCategoria" />

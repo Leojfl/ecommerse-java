@@ -283,29 +283,33 @@ public class UsuarioController implements Serializable {
 
     public void register() {
         try {
-         List<Usuario> list=getFacade().validarUsername(current);
+            List<Usuario> list = getFacade().validarUsername(current);
             Usuario usu = null;
-        for (Usuario a : list) {
-            usu = a;
-        }
-       if(usu == null ){
+            for (Usuario a : list) {
+                usu = a;
+            }
+            if (usu == null) {
                 current.setActivo(true);
-            current.setFkIdRol(new Rol(2));
-            current.setAlias(current.getUsername());
-            SessionManagedBean.setUsuarioLogin(current);
-            getFacade().create(current);
-            JsfUtil.addSuccessMessage("Usuario registrado");
-            
-                    FacesContext
-                            .getCurrentInstance()
-                            .getExternalContext()
-                            .redirect("../index.xhtml");
+                current.setFkIdRol(new Rol(2));
+                current.setAlias(current.getUsername());
+                getFacade().create(current);
+                List<Usuario> user = getFacade().findAll();
+                for (Usuario userDB : user) {
+                    current = userDB;
+                }
+                SessionManagedBean.setUsuarioLogin(current);
+                JsfUtil.addSuccessMessage("Usuario registrado");
 
-       }else{
-        JsfUtil.addErrorMessage("Usuario ya registrado");
+                FacesContext
+                        .getCurrentInstance()
+                        .getExternalContext()
+                        .redirect("../index.xhtml");
 
-       }
-       
+            } else {
+                JsfUtil.addErrorMessage("Usuario ya registrado");
+
+            }
+
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
 
